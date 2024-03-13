@@ -1,12 +1,15 @@
 from gradio_client import Client
+import os
 
 
 class Generator(object):
 
-    def generate(self, title: str, author: str = "", theme: str = ""):
+    def _generate_presentation_content(
+        self, title: str, author: str = "", theme: str = ""
+    ):
         theme = theme or "default"
-        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is the presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading + one base text per slide. Remember to divide slides with ---. Create as many slides, as possible.'
-        system_prompt = "You should create a full Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Create as many slides, as possible."
+        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading and one base text per slide. Remember to divide slides with ---. Create as many slides, as possible. Do not put a lot of text in one slide, create a lot of slides instead.'
+        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Create as many slides, as possible. Do not put a lot of text in one slide, create many slides instead."
         presentation_start = (
             f"---\nmarp: true\ntheme: {theme}\n_class: lead\n---\n\n# {title}\n"
         )
@@ -29,9 +32,9 @@ class Generator(object):
 
         # Add presentation start and generate the first part
         first_part = presentation_start + "---".join(
-            first_part.split(f"Sure! Here is the presentation on the topic {title}:\n")[
-                -1
-            ].split("---")[:-2:]
+            first_part.split(
+                f"Sure! Here is a long presentation on the topic {title}:"
+            )[-1].split("---")[:-2:]
         )
 
         # Generate the second part
@@ -48,3 +51,19 @@ class Generator(object):
         )
 
         return first_part + second_part
+
+    def _process_markdown(self, presentation_content: str, file_format: str) -> None:
+        # Save presentation as a markdown file
+        with open("./presentation.md", "w") as file:
+            file.write(presentation_content)
+
+        print("Generating document...")
+        os.system(
+            f"docker run --rm --init -v {os.getcwd()}:/home/marp/app/ -e LANG=EN marpteam/marp-cli presentation.md --{file_format}"
+        )
+
+    def generate_presentation(
+        self, file_format: str, title: str, author: str = "", theme: str = ""
+    ):
+        generated_content = self._generate_presentation_content(title, author, theme)
+        self._process_markdown(generated_content, file_format)

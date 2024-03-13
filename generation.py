@@ -30,7 +30,7 @@ class Generator(object):
         # Add presentation start and generate the first part
         first_part = presentation_start + "---".join(
             first_part.split(f"Sure! Here is the presentation on the topic {title}:\n")[
-                1
+                -1
             ].split("---")[:-2:]
         )
 

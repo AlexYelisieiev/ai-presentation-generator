@@ -4,17 +4,16 @@ import generation
 
 
 if __name__ == "__main__":
-    # token = input("Enter your Hugging Face API token: ")
-    # title = input("Enter title: ")
-    # author = input("Enter author (optional): ")
-    # theme = input("Enter theme (optional): ")
-    token = "what"
-    title = "AI Applications"
-    author = "Alex Yelisieiev"
-    theme = ""
+    title = input("Enter title: ")
+    author = input("Enter author (optional): ")
+    theme = input("Enter theme (optional): ")
 
-    generator = generation.Generator(token)
+    # Generate a presentation
+    generator = generation.Generator()
     result = generator.generate(title, author, theme)
+
+    # Save it
     with open("./presentation.md", "w") as file:
         file.write(result)
+
     print(result)

@@ -8,8 +8,8 @@ class Generator(object):
         self, title: str, author: str = "", theme: str = ""
     ):
         theme = theme or "default"
-        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is the presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading + one base text per slide. Remember to divide slides with ---. Create as many slides, as possible.'
-        system_prompt = "You should create a full Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Create as many slides, as possible."
+        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading and one base text per slide. Remember to divide slides with ---. Create as many slides, as possible. Do not put a lot of text in one slide, create a lot of slides instead.'
+        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Create as many slides, as possible. Do not put a lot of text in one slide, create many slides instead."
         presentation_start = (
             f"---\nmarp: true\ntheme: {theme}\n_class: lead\n---\n\n# {title}\n"
         )
@@ -32,7 +32,9 @@ class Generator(object):
 
         # Add presentation start and generate the first part
         first_part = presentation_start + "---".join(
-            first_part.split('":')[-1].split("---")[:-2:]
+            first_part.split(
+                f"Sure! Here is a long presentation on the topic {title}:"
+            )[-1].split("---")[:-2:]
         )
 
         # Generate the second part

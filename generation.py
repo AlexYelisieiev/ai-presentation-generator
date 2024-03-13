@@ -6,10 +6,6 @@ from gradio_client import Client
 
 class Generator(object):
 
-    def __init__(self, token) -> None:
-        # Set Hugging Face API token
-        self.token = token
-
     def generate(self, title: str, author: str = "", theme: str = ""):
         theme = theme or "default"
         start_prompt = f'Start your message exactly with the following:\n"Sure! Here is the presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading + one base text per slide. Remember to divide slides with ---. Create as many slides, as possible.'

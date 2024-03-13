@@ -1,6 +1,3 @@
-import json
-from time import sleep
-import requests
 from gradio_client import Client
 
 

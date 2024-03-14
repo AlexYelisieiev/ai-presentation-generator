@@ -19,8 +19,8 @@ class Generator(object):
             str: The generated presentation in markdown format.
         """
         theme = theme or "default"
-        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading and one base text per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---.'
-        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide."
+        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. One heading and one base text per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences.'
+        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements and images, only basic markdown and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences."
         presentation_start = (
             f"---\nmarp: true\ntheme: {theme}\n_class: lead\n---\n\n# {title}\n"
         )

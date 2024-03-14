@@ -8,6 +8,29 @@ This Python-based project allows you to generate full-length presentations in va
 - Choose from various themes for your presentation.
 - Output the presentation in different formats: PDF, PPTX, HTML.
 
+## Usage example 🔮
+
+### CLI
+
+```powershell
+Enter title: Capybaras
+Enter author (optional): Alex yelisieiev
+Choose theme:
+1) default
+2) gaia
+3) uncover
+> 3
+Choose file format:
+1) pdf
+2) pptx
+3) html
+> 1
+```
+
+### Output document
+
+![Screenshot 2024-03-14 154120](https://github.com/AlexYelisieiev/ai-presentation-generator/assets/62658287/3a6ba3ff-5885-41cd-baba-8923e8f385f4)
+
 ## How it works ⚙️
 
 The `Generator` class is the main class in this project. It has three main methods:
@@ -15,7 +38,6 @@ The `Generator` class is the main class in this project. It has three main met
 1. `_generate_presentation_content`: This method generates the content of the presentation using the Hugging Face's language model.
 2. `_process_markdown`: This method saves the generated content as a markdown file and then uses Docker to convert the markdown file into the desired format (PDF, PPTX, HTML).
 3. `generate_presentation`: This is the main method that you call to generate a presentation. It takes in the desired file format, the title of the presentation, the author (optional), and the theme (optional).
-
 
 ## Initial Setup 📦
 

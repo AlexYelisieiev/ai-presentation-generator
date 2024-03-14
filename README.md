@@ -41,7 +41,7 @@ The `Generator` class is the main class in this project. It has three main met
 
 ## Initial Setup 📦
 
-[Docker](https://www.docker.com/products/docker-desktop/)and [Python](https://www.python.org/) are needed for this project to work. Once they are both installed, you can quickly set up the app:
+[Docker](https://www.docker.com/products/docker-desktop/) and [Python](https://www.python.org/) are needed for this project to work. Once they are both installed, you can quickly set up the app:
 
 ```powershell
 # Pull the docker image

@@ -1,5 +1,7 @@
 # AI Presentation Generator 📃
 
+**No API key required**
+
 This Python-based project allows you to generate full-length presentations in various formats (PDF, PPTX, HTML) on a given topic. The presentation is created using the Marp framework and the content is generated using a space on Hugging Face.
 
 ## Features 🌟

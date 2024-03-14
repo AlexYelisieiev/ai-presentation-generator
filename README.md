@@ -10,7 +10,7 @@ This Python-based project allows you to generate full-length presentations in va
 
 ## Usage example 🔮
 
-### CLI
+### Terminal
 
 ```powershell
 Enter title: Capybaras

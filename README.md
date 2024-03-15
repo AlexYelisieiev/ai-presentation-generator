@@ -48,8 +48,6 @@ The `Generator` class is the main class in this project. It has three main met
 [Docker](https://www.docker.com/products/docker-desktop/) and [Python](https://www.python.org/) are needed for this project to work. Once they are both installed, you can quickly set up the app:
 
 ```powershell
-# Pull the docker image
-docker pull marpteam/marp-cli
 # Clone the project
 git clone "https://github.com/AlexYelisieiev/ai-presentation-generator"
 # Switch to the project directory

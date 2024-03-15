@@ -1,3 +1,4 @@
+import random
 from gradio_client import Client
 import os
 
@@ -19,10 +20,10 @@ class Generator(object):
             str: The generated presentation in markdown format.
         """
         theme = theme or "default"
-        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <heading here>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![<bg left or bg right (switch sides from slide to slide)>](https://source.unsplash.com/random/?<one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences.'
-        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences."
+        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## 1: ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <slide number>: <slide heading>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![](https://source.unsplash.com/random/?<only one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences. Create minimum 15 slides.'
+        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences. ADD AN IMAGE TO EACH AND EVERY SLIDE. MINIMUM 15 slides."
         presentation_start = (
-            f"---\nmarp: true\ntheme: {theme}\n_class: lead\n---\n\n# {title}\n"
+            f"---\nmarp: true\ntheme: {theme}\n_class: lead invert\n---\n\n# {title}\n"
         )
         presentation_start += f"by {author}\n\n---\n" if author else "\n---\n"
 
@@ -66,14 +67,13 @@ class Generator(object):
             api_name="/chat",
         )
 
-        # Remove the setup phrase and prettify
-        second_part = (
+        # Remove the setup and end phrases and prettify
+        second_part = "---".join(
             "\n---\n"
-            + second_part.split("Here is the presentation continuation:\n")[-1]
+            + second_part.split("Here is the presentation continuation:\n")[-1].split(
+                "---"
+            )[:-1:]
         )
-
-        print(f"{first_part=}")
-        print(f"{second_part=}")
 
         # Get result by adding the generated parts and prettifying
         # the markdown.
@@ -83,7 +83,14 @@ class Generator(object):
             .replace("---\n\n---", "---\n")
         )
 
-        return first_part + second_part
+        # Randomize images positions to left and right
+        print("Placing images...")
+        while "![](" in result:
+            result = result.replace(
+                "![](", f"![{random.choice(['bg right', 'bg left'])}]("
+            )
+
+        return result
 
     def _process_markdown(self, presentation_content: str, file_format: str) -> None:
         """

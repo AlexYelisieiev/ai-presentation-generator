@@ -16,7 +16,7 @@ This Python-based project allows you to generate full-length presentations in va
 
 ```powershell
 Enter title: Capybaras
-Enter author (optional): Alex yelisieiev
+Enter author (optional): Alex Yelisieiev
 Choose theme:
 1) default
 2) gaia

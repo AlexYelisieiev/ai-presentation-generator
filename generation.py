@@ -20,8 +20,8 @@ class Generator(object):
             str: The generated presentation in markdown format.
         """
         theme = theme or "default"
-        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## 1: ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <slide number>: <slide heading>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![](https://source.unsplash.com/random/?<only one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences. Create minimum 15 slides.'
-        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences. ADD AN IMAGE TO EACH AND EVERY SLIDE. MINIMUM 15 slides."
+        start_prompt = f'Start your message exactly with the following:\n"Sure! Here is a long presentation on the topic {title}:\n## 1: ..." The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <slide number>: <slide heading>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![](https://source.unsplash.com/random/?<only one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with ---. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences. Create minimum 12 slides.'
+        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences. ADD AN IMAGE TO EACH AND EVERY SLIDE. MINIMUM 12 slides."
         presentation_start = (
             f"---\nmarp: true\ntheme: {theme}\n_class: lead invert\n---\n\n# {title}\n"
         )
@@ -49,6 +49,8 @@ class Generator(object):
             )[-1].split("---")[:-2:]
         )
 
+        print(f"First part:\n{first_part}")
+
         # Change the system prompt so it knows it must continue from
         # where it left.
         system_prompt = "You should continue adding new slides to the presentation."
@@ -74,6 +76,8 @@ class Generator(object):
                 "---"
             )[:-1:]
         )
+
+        print(f"Second part:\n{second_part}")
 
         # Get result by adding the generated parts and prettifying
         # the markdown.

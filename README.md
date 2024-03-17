@@ -7,7 +7,7 @@ This Python-based project allows you to generate full-length presentations in va
 ## Features 🌟
 
 - Generate a full-length presentation on any given topic.
-- Choose from various themes for your presentation.
+- Choose from 2 presentation themes.
 - Output the presentation in different formats: PDF, PPTX, HTML.
 
 ## Usage example 🔮

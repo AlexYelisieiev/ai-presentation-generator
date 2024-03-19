@@ -2,22 +2,19 @@
 
 ![Static Badge](https://img.shields.io/badge/Cloud--based-grey?style=for-the-badge&label=%E2%98%81&labelColor=informational) ![Static Badge](https://img.shields.io/badge/No_API_key_required-grey?style=for-the-badge&label=%F0%9F%94%91&labelColor=informational)
 
+![Static Badge](https://img.shields.io/badge/python-blue?style=for-the-badge&logo=python&logoColor=blue&labelColor=white) ![Static Badge](https://img.shields.io/badge/marp-white?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/docker-white?style=for-the-badge&logo=docker&labelColor=darkblue&logoColor=white)
+
 ## 🌏 Overview
 
 This Python-based project allows you to generate full-length presentations in various formats (PDF, PPTX, HTML) on a given topic. The presentation file is created using the Marp framework and the content is generated using a space on Hugging Face.
 
 ![image](https://github.com/AlexYelisieiev/ai-presentation-generator/assets/62658287/02e24069-b270-4ebf-a3a7-7eb1dc0a12ba)
 
-
 ## 🌟 Features
 
 - Generate a presentation on any given topic.
 - Choose from 2 presentation themes.
-- Output the presentation in different formats: PDF, PPTX, and HTML.
-
-## 🧪 Technologies Used
-
-![Static Badge](https://img.shields.io/badge/python-blue?style=for-the-badge&logo=python&logoColor=blue&labelColor=white) ![Static Badge](https://img.shields.io/badge/marp-white?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/docker-white?style=for-the-badge&logo=docker&labelColor=darkblue&logoColor=white)
+- Output the presentation in different formats: PDF, PPTX, HTML.
 
 ## 📦 Getting Started
 

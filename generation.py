@@ -21,8 +21,8 @@ class Generator(object):
             str: The generated presentation in markdown format.
         """
         theme = theme or "default"
-        start_prompt = f"Start your message exactly with the following:\n'Sure! Here is a long presentation on the topic {title}:\n## 1 ...' The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <slide number>: <slide heading>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![](https://source.unsplash.com/random/?<only one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with `---`. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences. The heading, base text, and the image are always on the same slide. Don't stop creating slides until the user tells you to. Just keep creating slides one by one and don't stop at all, and don't forget to separate slides with `---`."
-        system_prompt = "You should create a full long Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences. ADD AN IMAGE TO EACH AND EVERY SLIDE. Just keep creating slides, one by one, until the user tells you to stop. Separate slides with `---`."
+        start_prompt = f"Start your message exactly with the following:\n'Sure! Here is a presentation on the topic {title}:\n## 1 ...' The title slide has already been added, so just start adding main content. Syntax: add slide headings with `## <slide number>: <slide heading>` and divide slides with `---`; add base slide text without formatting under headings. Add images using the following syntax: `![](https://source.unsplash.com/random/?<only one search keyword here>)`. One heading, one base text, and one image per slide. Remember to divide slides with `---`. Put LITTLE OF TEXT in each slide and remember to divide slides with ---. VERY LITTLE of text per slide, only a few sentences. The heading, base text, and the image are always on the same slide. Don't stop creating slides until the user tells you to. Just keep creating slides one by one and don't stop at all, and don't forget to separate slides with `---`."
+        system_prompt = "You should create a full Marp presentation on the given theme. DO NOT use html elements, only basic markdown, images and text. DO NOT put lots of text in one slide. Fill each slide with meaningful content. DO NOT write any other text else except what the user tells you to. Divide slides with ---. Put very little text in each slide. VERY LITTLE of text per slide, only a few sentences. ADD AN IMAGE TO EACH AND EVERY SLIDE. Just keep creating slides, one by one, until the user tells you to stop. Separate slides with `---`. __THE PRESENTATION MUST CONTAIN A LOT OF SMALL SLIDES__ WITH ALMOST NO TEXT PER EACH."
         presentation_start = (
             f"---\nmarp: true\ntheme: {theme}\n_class: lead invert\n---\n\n# {title}\n"
         )
@@ -35,7 +35,7 @@ class Generator(object):
         first_part = client.predict(
             start_prompt,  # str  in 'Message' Textbox component
             system_prompt,  # str  in 'System prompt' Textbox component
-            2048,  # float (numeric value between 1 and 2048) in 'Max new tokens' Slider component
+            1950,  # float (numeric value between 1 and 2048) in 'Max new tokens' Slider component
             0.1,  # float (numeric value between 0.1 and 4.0) in 'Temperature' Slider component
             0.05,  # float (numeric value between 0.05 and 1.0) in 'Top-p (nucleus sampling)' Slider component
             1,  # float (numeric value between 1 and 1000) in 'Top-k' Slider component
@@ -48,7 +48,7 @@ class Generator(object):
         # Add presentation start to the first part
         first_part = presentation_start + "---".join(
             first_part.split(
-                f"Sure! Here is a long presentation on the topic {title}:")
+                f"Sure! Here is a presentation on the topic {title}:")
             [-1].split("---")[:-2:])
 
 
@@ -62,7 +62,7 @@ class Generator(object):
             first_part +
             "\nContinue adding slides from here. Start your response with 'Here is the presentation continuation:\n---\n\n## <next slide heading here>\n...'",  # str  in 'Message' Textbox component
             system_prompt,  # str  in 'System prompt' Textbox component
-            1900,  # float (numeric value between 1 and 2048) in 'Max new tokens' Slider component
+            1950,  # float (numeric value between 1 and 2048) in 'Max new tokens' Slider component
             0.1,  # float (numeric value between 0.1 and 4.0) in 'Temperature' Slider component
             0.05,  # float (numeric value between 0.05 and 1.0) in 'Top-p (nucleus sampling)' Slider component
             1,  # float (numeric value between 1 and 1000) in 'Top-k' Slider component

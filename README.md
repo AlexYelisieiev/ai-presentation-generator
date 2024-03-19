@@ -51,4 +51,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is distributed under the MIT License. See [LICENSE.md](LICENSE.md) for more information.
+This project is distributed under the MIT License. See [LICENSE](LICENSE) for more information.
